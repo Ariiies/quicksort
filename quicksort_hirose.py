@@ -1,29 +1,29 @@
-# particion para el ordenamiento, este altera la lista
-# orginal, su logica es mas compleja pero consume menos
-# recursos
+# Function to partition, it works in the same list, is a litle more 
+# difficult to understand but it consumes less resources 
 def partition(array, low, high, reverse=False):
-    # elegimos el primer elemento
+    # dwfinition of pivot and pointiers 
     pivot, le, ri = array[low], low+1, high
-    # buvle principal donde se divide la lista
     while True:
-        if reverse: # para un ordenamiento descendente
+        # reverse is for sorting list in ascending or descending
+        # move the pointiers...
+        if reverse: 
             while le <= ri and array[le] >= pivot:
                 le+=1
             while le <= ri and array[ri] <= pivot:
                 ri-=1
-        else: # para un ordenamiento ascendente
+        else: 
             while le <= ri and array[le] <= pivot:
                 le+=1
             while le <= ri and array[ri] >= pivot:
                 ri-=1
-        if ri < le:
+        if ri < le: # when pointiers crossing it each other, breaks the loop
             break
         else:
             array[le], array[ri] = array[ri], array[le]
     array[low], array[ri] = array[ri], array[low]
-    return ri
+    return ri #returns ri because this will be the new pivot
 
-# funsion de ordenamiento quicksort
+# main function
 def quicksort(array, low, high, reverse=False):
     if low < high:
         pi = partition(array, low, high,reverse)
